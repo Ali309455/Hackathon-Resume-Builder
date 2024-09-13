@@ -6,11 +6,14 @@
     <title>Resume</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="utility.css">
+    <link rel="stylesheet" href="formsstyle.css">
 </head>
 <body>
+    <div class="bar"></div>
     <div class="resume">
+        <!-- <div class="edit"><img src="assets/edit.svg" alt="">Edit</div> -->
         <!-- Personal Information -->
-        <header class="personal-info">
+        <!-- <header class="personal-info">
             <img src="assets/profile.png" alt="Profile Picture" class="profile-pic">
             <div class="personalinfo_desc">
                 <h1>Mohammad Ali</h1>
@@ -19,10 +22,10 @@
                     enteryouremail@gmail.com | <img src="assets/phone.svg" alt="phone-icon"> 0321-2223456
                 </p>
             </div>
-        </header>
+        </header> -->
         
         <!-- Education -->
-        <section class="section">
+        <!-- <section class="section">
             <h2>Education</h2>
             <div class="education-item">
                 <div class="hidebtn">
@@ -42,10 +45,10 @@
                     <p>NED University, 2016 - 2020</p>
                 </div>
             </div>
-        </section>
+        </section> -->
 
         <!-- Skills -->
-        <section class="section">
+        <!-- <section class="section">
             <h2>Skills</h2>
             <ul class="skills-list">
                 <li><b>Programming:</b> JavaScript, Python</li>
@@ -53,10 +56,10 @@
                 <li><b>Database Management:</b> MongoDB</li>
                 <li><b>Tools:</b> Git</li>
             </ul>
-        </section>
+        </section> -->
 
         <!-- Experience -->
-        <section class="section">
+        <!-- <section class="section">
             <h2>Work Experience</h2>
             <div class="experience-item">
                 <div class="hidebtn">
@@ -84,8 +87,77 @@
                     </ul>
                 </div>
             </div>
-        </section>
+        </section> -->
     </div>
+    <div class="form-container">
+        <h1 class="main_heading" >Resume Builder</h1>
+        <form id="resumeForm">
+
+            <!-- Personal Information Section -->
+            <section class="form-section">
+                <h2>Personal Information</h2>
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" placeholder="Enter your full name" required>
+                
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" placeholder="Enter your email address" required>
+                
+                <label for="phone">Phone:</label>
+                <input type="tel" id="phone" name="phone" placeholder="Enter your phone number" required>
+                
+                <label for="profilePicture">Profile Picture:</label>
+                <input type="file" id="profilePicture" name="profilePicture">
+            </section>
+
+            <!-- Education Section -->
+            <section class="form-section" id="educationSection">
+                <h2>Education</h2>
+                <div class="form_education_item">
+                    <label for="degree">Degree:</label>
+                    <input type="text" name="degree" placeholder="e.g., Master of Science" required>
+                    
+                    <label for="university">University/College:</label>
+                    <input type="text" name="university" placeholder="e.g., XYZ University" required>
+                    
+                    <label for="year">Year:</label>
+                    <input type="text" name="year" placeholder="e.g., 2020 - 2022" required>
+                    
+                </div>
+                <button type="button" id="addeducation">Add More Education</button>
+            </section>
+
+            <!-- Skills Section -->
+            <section class="form-section">
+                <h2>Skills</h2>
+                <label for="skills">List your skills: use /b for bold tag e.g. PROGMRAMMING:/b JavaScript, Python, HTML/CSS /new Tools:/b Git "/new" for new line</label>
+                <textarea id="skills" name="skills" rows="3" placeholder="e.g., JavaScript, Python, HTML/CSS, etc."></textarea>
+            </section>
+
+            <!-- Work Experience Section -->
+            <section class="form-section" id="experienceSection">
+                <h2>Work Experience</h2>
+                <div class="form_experience_item">
+                    <!-- <img class = "close" src="assets/close.svg" width="20px" alt=""> -->
+                    <label for="jobTitle">Job Title:</label>
+                    <input type="text" name="jobTitle" placeholder="e.g., Software Developer" required>
+                    
+                    <label for="company">Company:</label>
+                    <input type="text" name="company" placeholder="e.g., Devsinc." required>
+                    
+                    <label for="jobYear">Year:</label>
+                    <input type="text" name="jobYear" placeholder="e.g., 2022 - Present" required>
+                    
+                    <textarea name="jobDescription" rows="3" placeholder="Describe your responsibilities"></textarea>
+                    
+                </div>
+                <button type="button" id="addExperience" >Add More Experience</button>
+            </section>
+
+            <button class = "submitbtn" type="submit">Generate Resume</button>
+        </form>
+    </div>
+
     <script src="main.js"></script>
+    <!-- <script src="forms.js"></script> -->
 </body>
 </html>
