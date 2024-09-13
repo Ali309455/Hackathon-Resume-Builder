@@ -37,7 +37,7 @@ function getformdata(selector) {
     });
 }
 function addadditionalform(selector) {
-    if (selector == "education-item") {
+    if (selector == "form_education_item") {
         let elder = document.getElementsByClassName(`${selector}`);
         if (elder.length > 0) {
             let newsibling = document.createElement("div");
@@ -58,7 +58,7 @@ function addadditionalform(selector) {
             console.error("No '.education-item' elements found");
         }
     }
-    else if (selector == "experience-item") {
+    else if (selector == "form_experience_item") {
         let elder = document.getElementsByClassName(`${selector}`);
         if (elder.length > 0) {
             let newsibling = document.createElement("div");
@@ -294,11 +294,11 @@ function main() {
     return __awaiter(this, void 0, void 0, function* () {
         var _a, _b, _c;
         (_a = document.getElementById("addeducation")) === null || _a === void 0 ? void 0 : _a.addEventListener("click", () => {
-            addadditionalform("education-item");
+            addadditionalform("form_education_item");
             closeadditionalform("education-item");
         });
         (_b = document.getElementById("addExperience")) === null || _b === void 0 ? void 0 : _b.addEventListener("click", () => {
-            addadditionalform("experience-item");
+            addadditionalform("form_experience_item");
             closeadditionalform("experience-item");
         });
         (_c = document.querySelector(".submitbtn")) === null || _c === void 0 ? void 0 : _c.addEventListener("click", () => __awaiter(this, void 0, void 0, function* () {

@@ -33,7 +33,7 @@ async function getformdata(selector: string) {
 }
 
 function addadditionalform(selector: string) {
-  if (selector == "education-item") {
+  if (selector == "form_education_item") {
     let elder: any = document.getElementsByClassName(`${selector}`);
     if (elder.length > 0) {
       let newsibling = document.createElement("div");
@@ -52,7 +52,7 @@ function addadditionalform(selector: string) {
     } else {
       console.error("No '.education-item' elements found");
     }
-  } else if (selector == "experience-item") {
+  } else if (selector == "form_experience_item") {
     let elder: any = document.getElementsByClassName(`${selector}`);
     if (elder.length > 0) {
       let newsibling = document.createElement("div");
@@ -315,11 +315,11 @@ function createresume(data: object) {
 
 async function main() {
   document.getElementById("addeducation")?.addEventListener("click", () => {
-    addadditionalform("education-item");
+    addadditionalform("form_education_item");
     closeadditionalform("education-item");
   });
   document.getElementById("addExperience")?.addEventListener("click", () => {
-    addadditionalform("experience-item");
+    addadditionalform("form_experience_item");
     closeadditionalform("experience-item");
   });
 
