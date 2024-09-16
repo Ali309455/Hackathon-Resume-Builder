@@ -74,6 +74,8 @@ p {
 
 .section h2 {
   border-bottom: 2px solid #333;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
   padding-bottom: 5px;
   margin-bottom: 10px;
   font-size: 1.5em;
@@ -121,6 +123,25 @@ ul li {
   right: 25%;
   cursor: pointer;
 }
+
+
+/* Default style for contenteditable elements */
+[contenteditable] {
+  border: none; /* No border by default */
+  border-radius: 5px; /* Slightly rounded corners */
+  padding:  5px 10px; /* Add some padding for better appearance */
+  transition: border 0.3s ease; /* Smooth transition for border changes */
+}
+
+/* Style when the contenteditable element is focused */
+[contenteditable]:focus {
+  border: 1px solid gray;
+  border-bottom-right-radius: 8px;
+  outline: none;
+  border-bottom-left-radius: 08px;
+}
+
+
 
 @media (max-width: 625px) {
     p{

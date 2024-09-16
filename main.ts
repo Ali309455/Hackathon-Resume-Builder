@@ -2,6 +2,8 @@ interface FormDataObject {
   [key: string]: string | string[];
 }
 
+
+// get data from the forms
 async function getformdata(selector: string) {
   return new Promise((resolve, reject) => {
     document
@@ -31,15 +33,15 @@ async function getformdata(selector: string) {
       });
   });
 }
-
+// add fuctionality to add form
 function addadditionalform(selector: string) {
   if (selector == "form_education_item") {
     let elder: any = document.getElementsByClassName(`${selector}`);
     if (elder.length > 0) {
       let newsibling = document.createElement("div");
-      newsibling.classList.add("education-item");
+      newsibling.classList.add("form_education_item");
       newsibling.innerHTML = `
-            <img class = "close" src="assets/close.svg" width="20px" alt="">
+            <img class = "close" src="assets/close.svg" width="18px" alt="">
             <label class = "topsep" for="degree">Degree:</label>
             <input type="text" name="degree" placeholder="e.g., Master of Science" required>
             
@@ -56,7 +58,7 @@ function addadditionalform(selector: string) {
     let elder: any = document.getElementsByClassName(`${selector}`);
     if (elder.length > 0) {
       let newsibling = document.createElement("div");
-      newsibling.classList.add("experience-item");
+      newsibling.classList.add("form_experience_item");
       newsibling.innerHTML = `
             <img class = "close" src="assets/close.svg" width="20px" alt="">
             <label class = "topsep" for="jobTitle">Job Title:</label>
@@ -75,6 +77,7 @@ function addadditionalform(selector: string) {
     }
   }
 }
+// add functionality to close it 
 function closeadditionalform(parent: string) {
   const items = document.querySelectorAll(`.${parent}`);
   console.log(items);
@@ -91,7 +94,7 @@ function closeadditionalform(parent: string) {
     }
   });
 }
-
+// add del icon and making it fuctional
 function removeitem(selector: string) {
   let e: any = document.querySelectorAll(`.${selector}`);
   if (!e) {
@@ -113,7 +116,7 @@ function removeitem(selector: string) {
     });
   }
 }
-
+// create resume from the form data
 function createresume(data: object) {
   const container = document.querySelector(".resume");
   if (!container) {
@@ -127,7 +130,7 @@ function createresume(data: object) {
         <img src="assets/profile.png" alt="Profile Picture" class="profile-pic">
         <div class="personalinfo_desc">
         <h1>${(data as FormDataObject).name}</h1>
-            <p class="Email flex">
+            <p contenteditable = true class="Email flex">
                 <img src="assets/email.svg" alt="email-icon">
                 ${
                   (data as FormDataObject).email
@@ -164,8 +167,8 @@ function createresume(data: object) {
                 <div class="hide"><img src="assets/delete.svg" alt="delete-icon"></div>
             </div>
             <div class="desc">
-                <h3>${degree}</h3>
-                <p>${university}, ${year}</p>
+                <h3 contenteditable = true >${degree}</h3>
+                <p contenteditable = true >${university}, ${year}</p>
             </div>
         </div>
         </section>`;
@@ -175,14 +178,14 @@ function createresume(data: object) {
         container.innerHTML +
         `<!-- Education -->
     <section class="section">
-        <h2>Education</h2>
+        <h2 >Education</h2>
         <div class="education-item resume-education">
             <div class="hidebtn">
                 <div class="hide"><img src="assets/delete.svg" alt="delete-icon"></div>
             </div>
             <div class="desc">
-                <h3>${(data as FormDataObject).degree}</h3>
-                <p>${(data as FormDataObject).university}, ${
+                <h3 contenteditable = true >${(data as FormDataObject).degree}</h3>
+                <p contenteditable = true >${(data as FormDataObject).university}, ${
           (data as FormDataObject).year
         }</p>
             </div>
@@ -190,43 +193,52 @@ function createresume(data: object) {
         </section>`;
     }
 
+    let skills = (data as FormDataObject).skills
+    let skillslist =  document.createElement("ul")
+    skillslist.classList.add("skills-list")
+
     container.innerHTML =
-      container.innerHTML +
-      `<!-- Skills -->
-    <section class="section">
-        <h2>Skills</h2>
-        <ul class="skills-list">`
-        let skills = (data as FormDataObject).skills
-        if (skills.includes("/new")){
+          container.innerHTML +
+          `<!-- Skills -->
+        <section class="section skills">
+            <h2>Skills</h2>`
+    if (skills.includes("/new")){
 
         skills = (skills as string).split("/new")
         for (let item of skills) {
+          
           if (item.includes("/b")){
             let e = (item.split('/b'));
+            console.log(e);
+            skillslist.innerHTML =
+            skillslist.innerHTML +
+            `<li><b>${e[0]}</b> ${e[1]}</li>`
             
-            container.innerHTML =
-            container.innerHTML +
-            `<li><b>${e[0]}</b> ${e[1]}</li>
-            </ul>
-        </section>`;
         }
       }
+      // container.innerHTML =
+      //       container.innerHTML +`</ul>
+      //   </section>`;
+      console.log(skillslist.innerHTML);
     }
-    else {container.innerHTML =
-            container.innerHTML +
-            `<li>${skills}</li>
-            </ul>
-        </section>`;
-    if(skills.includes("/b")){
-      console.log('her3w');
-      
-      let item = (skills as string).split("/b")
-      container.innerHTML =
-            container.innerHTML +
-            `<li><b>${item[0]}</b> ${item[1]}</li>
-            </ul>
+    else {
+      if(skills.includes("/b")){
+        
+        let item = (skills as string).split("/b")
+        skillslist.innerHTML =
+      skillslist.innerHTML +
+        `<li><b>${item[0]}</b> ${item[1]}</li>
+        </ul>
         </section>`;}
-    // }
+        skillslist.innerHTML =
+        skillslist.innerHTML +
+        `<li>${skills}</li>
+            `;
+    }
+    (document.querySelector(".skills"))?.appendChild(skillslist)
+    
+    
+    
     if (
       Array.isArray((data as FormDataObject).jobTitle) &&
       Array.isArray((data as FormDataObject).jobYear)
@@ -254,10 +266,10 @@ function createresume(data: object) {
                         <div class="hide"><img src="assets/delete.svg" alt="delete-icon"></div>
                     </div>
                     <div class="desc">
-                        <h3>${jobTitle}</h3>
-                        <p >${company}, ${jobYear}</p>
+                        <h3 contenteditable = true >${jobTitle}</h3>
+                        <p contenteditable = true >${company}, ${jobYear}</p>
                         <ul>
-                            <li>${jobDescription}</li>
+                            <li contenteditable = true>${jobDescription}</li>
                         </ul>
                     </div>
                 </div>
@@ -276,8 +288,8 @@ function createresume(data: object) {
                 <div class="hide"><img src="assets/delete.svg" alt="delete-icon"></div>
             </div>
             <div class="desc">
-                <h3>${(data as FormDataObject).jobTitle}</h3>
-                <p >${(data as FormDataObject).company}, ${
+                <h3 contenteditable = true >${(data as FormDataObject).jobTitle}</h3>
+                <p contenteditable = true >${(data as FormDataObject).company}, ${
           (data as FormDataObject).jobYear
         }</p>
                 <ul>
@@ -296,7 +308,7 @@ function createresume(data: object) {
     }
   
 
-  }
+  
   
 }, 2000);
   if (document.querySelector(".form-container")) {
@@ -314,33 +326,35 @@ function createresume(data: object) {
 }
 
 async function main() {
+  // make form add education/experince btn fuctional
   document.getElementById("addeducation")?.addEventListener("click", () => {
     addadditionalform("form_education_item");
-    closeadditionalform("education-item");
+    closeadditionalform("form_education_item");
   });
   document.getElementById("addExperience")?.addEventListener("click", () => {
     addadditionalform("form_experience_item");
-    closeadditionalform("experience-item");
+    closeadditionalform("form_experience_item");
   });
-
+// trigger series of events when submit btn is clicked
   document.querySelector(".submitbtn")?.addEventListener("click", async () => {
+    // formdata object
     let res: any = await getformdata("resumeForm");
     console.log(res);
-    let chk: object = {
-      name: "Jon Stewart Doe",
-      email: "test@example.us",
-      phone: "6019521325",
-      profilePicture: new File([""], "profile.png", { type: "image/png" }), // Example file with content, name, and type
-      degree: "Master of Science",
-      university: "XYZ University",
-      year: "2020 - 2022",
-      company: "Fake Company",
-      jobTitle: "Software Developer",
-      jobYear: "2022 - Present",
-      jobDescription:
-        "Developed and maintained web applications using JavaScript.",
-      skills: "PROGMRAMMING:/b JavaScript, Python, HTML/CSS /new Tools:/b Git",
-    };
+    // let chk: object = {
+    //   name: "Jon Stewart Doe",
+    //   email: "test@example.us",
+    //   phone: "6019521325",
+    //   profilePicture: new File([""], "profile.png", { type: "image/png" }), // Example file with content, name, and type
+    //   degree: "Master of Science",
+    //   university: "XYZ University",
+    //   year: "2020 - 2022",
+    //   company: "Fake Company",
+    //   jobTitle: "Software Developer",
+    //   jobYear: "2022 - Present",
+    //   jobDescription:
+    //     "Developed and maintained web applications using JavaScript.",
+    //   skills: "PROGMRAMMING:/b JavaScript, Python, HTML/CSS /new Tools:/b Git",
+    // };
     createresume(res);
     document.querySelector(".bar")?.scrollTo({
       top: 0,
@@ -349,7 +363,7 @@ async function main() {
     setTimeout(() => {
       removeitem("education-item");
       removeitem("experience-item");
-      (document.querySelector(".edit") as HTMLElement).style.display = "flex";
+      // (document.querySelector(".edit") as HTMLElement).style.display = "flex";
       
     }, 2000);
   });

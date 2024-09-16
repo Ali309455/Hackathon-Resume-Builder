@@ -8,6 +8,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+// get data from the forms
 function getformdata(selector) {
     return __awaiter(this, void 0, void 0, function* () {
         return new Promise((resolve, reject) => {
@@ -36,14 +37,15 @@ function getformdata(selector) {
         });
     });
 }
+// add fuctionality to add form
 function addadditionalform(selector) {
     if (selector == "form_education_item") {
         let elder = document.getElementsByClassName(`${selector}`);
         if (elder.length > 0) {
             let newsibling = document.createElement("div");
-            newsibling.classList.add("education-item");
+            newsibling.classList.add("form_education_item");
             newsibling.innerHTML = `
-            <img class = "close" src="assets/close.svg" width="20px" alt="">
+            <img class = "close" src="assets/close.svg" width="18px" alt="">
             <label class = "topsep" for="degree">Degree:</label>
             <input type="text" name="degree" placeholder="e.g., Master of Science" required>
             
@@ -62,7 +64,7 @@ function addadditionalform(selector) {
         let elder = document.getElementsByClassName(`${selector}`);
         if (elder.length > 0) {
             let newsibling = document.createElement("div");
-            newsibling.classList.add("experience-item");
+            newsibling.classList.add("form_experience_item");
             newsibling.innerHTML = `
             <img class = "close" src="assets/close.svg" width="20px" alt="">
             <label class = "topsep" for="jobTitle">Job Title:</label>
@@ -82,6 +84,7 @@ function addadditionalform(selector) {
         }
     }
 }
+// add functionality to close it 
 function closeadditionalform(parent) {
     const items = document.querySelectorAll(`.${parent}`);
     console.log(items);
@@ -97,6 +100,7 @@ function closeadditionalform(parent) {
         }
     });
 }
+// add del icon and making it fuctional
 function removeitem(selector) {
     let e = document.querySelectorAll(`.${selector}`);
     if (!e) {
@@ -118,6 +122,7 @@ function removeitem(selector) {
         });
     }
 }
+// create resume from the form data
 function createresume(data) {
     const container = document.querySelector(".resume");
     if (!container) {
@@ -125,12 +130,13 @@ function createresume(data) {
         return;
     }
     setTimeout(() => {
+        var _a;
         container.innerHTML = `<div class="edit"><img src="assets/edit.svg" alt="">Edit</div><!-- Personal Information -->
     <header class="personal-info">
         <img src="assets/profile.png" alt="Profile Picture" class="profile-pic">
         <div class="personalinfo_desc">
         <h1>${data.name}</h1>
-            <p class="Email flex">
+            <p contenteditable = true class="Email flex">
                 <img src="assets/email.svg" alt="email-icon">
                 ${data.email}  &nbsp| <img src="assets/phone.svg" alt="phone-icon"> ${data.phone}
             </p>
@@ -155,8 +161,8 @@ function createresume(data) {
                 <div class="hide"><img src="assets/delete.svg" alt="delete-icon"></div>
             </div>
             <div class="desc">
-                <h3>${degree}</h3>
-                <p>${university}, ${year}</p>
+                <h3 contenteditable = true >${degree}</h3>
+                <p contenteditable = true >${university}, ${year}</p>
             </div>
         </div>
         </section>`;
@@ -167,89 +173,92 @@ function createresume(data) {
                 container.innerHTML +
                     `<!-- Education -->
     <section class="section">
-        <h2>Education</h2>
+        <h2 >Education</h2>
         <div class="education-item resume-education">
             <div class="hidebtn">
                 <div class="hide"><img src="assets/delete.svg" alt="delete-icon"></div>
             </div>
             <div class="desc">
-                <h3>${data.degree}</h3>
-                <p>${data.university}, ${data.year}</p>
+                <h3 contenteditable = true >${data.degree}</h3>
+                <p contenteditable = true >${data.university}, ${data.year}</p>
             </div>
         </div>
         </section>`;
         }
+        let skills = data.skills;
+        let skillslist = document.createElement("ul");
+        skillslist.classList.add("skills-list");
         container.innerHTML =
             container.innerHTML +
                 `<!-- Skills -->
-    <section class="section">
-        <h2>Skills</h2>
-        <ul class="skills-list">`;
-        let skills = data.skills;
+        <section class="section skills">
+            <h2>Skills</h2>`;
         if (skills.includes("/new")) {
             skills = skills.split("/new");
             for (let item of skills) {
                 if (item.includes("/b")) {
                     let e = (item.split('/b'));
-                    container.innerHTML =
-                        container.innerHTML +
-                            `<li><b>${e[0]}</b> ${e[1]}</li>
-            </ul>
-        </section>`;
+                    console.log(e);
+                    skillslist.innerHTML =
+                        skillslist.innerHTML +
+                            `<li><b>${e[0]}</b> ${e[1]}</li>`;
                 }
             }
+            // container.innerHTML =
+            //       container.innerHTML +`</ul>
+            //   </section>`;
+            console.log(skillslist.innerHTML);
         }
         else {
-            container.innerHTML =
-                container.innerHTML +
-                    `<li>${skills}</li>
-            </ul>
-        </section>`;
             if (skills.includes("/b")) {
-                console.log('her3w');
                 let item = skills.split("/b");
-                container.innerHTML =
-                    container.innerHTML +
+                skillslist.innerHTML =
+                    skillslist.innerHTML +
                         `<li><b>${item[0]}</b> ${item[1]}</li>
-            </ul>
+        </ul>
         </section>`;
             }
-            // }
-            if (Array.isArray(data.jobTitle) &&
-                Array.isArray(data.jobYear)) {
-                container.innerHTML =
-                    container.innerHTML +
-                        `<!-- Experience -->
+            skillslist.innerHTML =
+                skillslist.innerHTML +
+                    `<li>${skills}</li>
+            `;
+        }
+        (_a = (document.querySelector(".skills"))) === null || _a === void 0 ? void 0 : _a.appendChild(skillslist);
+        if (Array.isArray(data.jobTitle) &&
+            Array.isArray(data.jobYear)) {
+            container.innerHTML =
+                container.innerHTML +
+                    `<!-- Experience -->
         <section class="section">
             <h2>Work Experience</h2>`;
-                for (let index = 0; index < data.jobTitle.length; index++) {
-                    const jobYear = data.jobYear[index];
-                    const jobTitle = data.jobTitle[index];
-                    const company = data.company[index];
-                    const jobDescription = data.jobDescription[index];
-                    container.innerHTML =
-                        container.innerHTML +
-                            `
+            for (let index = 0; index < data.jobTitle.length; index++) {
+                const jobYear = data.jobYear[index];
+                const jobTitle = data.jobTitle[index];
+                const company = data.company[index];
+                const jobDescription = data.jobDescription[index];
+                container.innerHTML =
+                    container.innerHTML +
+                        `
                 <div class="experience-item resume-experience">
                     <div class="hidebtn">
                         <div class="hide"><img src="assets/delete.svg" alt="delete-icon"></div>
                     </div>
                     <div class="desc">
-                        <h3>${jobTitle}</h3>
-                        <p >${company}, ${jobYear}</p>
+                        <h3 contenteditable = true >${jobTitle}</h3>
+                        <p contenteditable = true >${company}, ${jobYear}</p>
                         <ul>
-                            <li>${jobDescription}</li>
+                            <li contenteditable = true>${jobDescription}</li>
                         </ul>
                     </div>
                 </div>
                 <div class="experience-item">
                 </section>`;
-                }
             }
-            else {
-                container.innerHTML =
-                    container.innerHTML +
-                        `<!-- Experience -->
+        }
+        else {
+            container.innerHTML =
+                container.innerHTML +
+                    `<!-- Experience -->
     <section class="section">
         <h2>Work Experience</h2>
 
@@ -258,23 +267,22 @@ function createresume(data) {
                 <div class="hide"><img src="assets/delete.svg" alt="delete-icon"></div>
             </div>
             <div class="desc">
-                <h3>${data.jobTitle}</h3>
-                <p >${data.company}, ${data.jobYear}</p>
+                <h3 contenteditable = true >${data.jobTitle}</h3>
+                <p contenteditable = true >${data.company}, ${data.jobYear}</p>
                 <ul>
                     <li>${data.jobDescription}</li>
                 </ul>
             </div>
         </div>
     </section>`;
-            }
-            if (document.querySelector(".resume")) {
-                document.querySelector(".resume").style.display =
-                    "block";
-                document.querySelector(".bar").style.display = "none";
-            }
-            else {
-                console.error("No resume container found");
-            }
+        }
+        if (document.querySelector(".resume")) {
+            document.querySelector(".resume").style.display =
+                "block";
+            document.querySelector(".bar").style.display = "none";
+        }
+        else {
+            console.error("No resume container found");
         }
     }, 2000);
     if (document.querySelector(".form-container")) {
@@ -293,32 +301,36 @@ function createresume(data) {
 function main() {
     return __awaiter(this, void 0, void 0, function* () {
         var _a, _b, _c;
+        // make form add education/experince btn fuctional
         (_a = document.getElementById("addeducation")) === null || _a === void 0 ? void 0 : _a.addEventListener("click", () => {
             addadditionalform("form_education_item");
-            closeadditionalform("education-item");
+            closeadditionalform("form_education_item");
         });
         (_b = document.getElementById("addExperience")) === null || _b === void 0 ? void 0 : _b.addEventListener("click", () => {
             addadditionalform("form_experience_item");
-            closeadditionalform("experience-item");
+            closeadditionalform("form_experience_item");
         });
+        // trigger series of events when submit btn is clicked
         (_c = document.querySelector(".submitbtn")) === null || _c === void 0 ? void 0 : _c.addEventListener("click", () => __awaiter(this, void 0, void 0, function* () {
             var _a;
+            // formdata object
             let res = yield getformdata("resumeForm");
             console.log(res);
-            let chk = {
-                name: "Jon Stewart Doe",
-                email: "test@example.us",
-                phone: "6019521325",
-                profilePicture: new File([""], "profile.png", { type: "image/png" }), // Example file with content, name, and type
-                degree: "Master of Science",
-                university: "XYZ University",
-                year: "2020 - 2022",
-                company: "Fake Company",
-                jobTitle: "Software Developer",
-                jobYear: "2022 - Present",
-                jobDescription: "Developed and maintained web applications using JavaScript.",
-                skills: "PROGMRAMMING:/b JavaScript, Python, HTML/CSS /new Tools:/b Git",
-            };
+            // let chk: object = {
+            //   name: "Jon Stewart Doe",
+            //   email: "test@example.us",
+            //   phone: "6019521325",
+            //   profilePicture: new File([""], "profile.png", { type: "image/png" }), // Example file with content, name, and type
+            //   degree: "Master of Science",
+            //   university: "XYZ University",
+            //   year: "2020 - 2022",
+            //   company: "Fake Company",
+            //   jobTitle: "Software Developer",
+            //   jobYear: "2022 - Present",
+            //   jobDescription:
+            //     "Developed and maintained web applications using JavaScript.",
+            //   skills: "PROGMRAMMING:/b JavaScript, Python, HTML/CSS /new Tools:/b Git",
+            // };
             createresume(res);
             (_a = document.querySelector(".bar")) === null || _a === void 0 ? void 0 : _a.scrollTo({
                 top: 0,
@@ -327,7 +339,7 @@ function main() {
             setTimeout(() => {
                 removeitem("education-item");
                 removeitem("experience-item");
-                document.querySelector(".edit").style.display = "flex";
+                // (document.querySelector(".edit") as HTMLElement).style.display = "flex";
             }, 2000);
         }));
     });

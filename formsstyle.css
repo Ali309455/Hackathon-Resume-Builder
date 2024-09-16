@@ -52,8 +52,8 @@ h1 {
 }
 .close{
   position: relative;
-  top: 33px;
-  left: 97%;
+  top: 32px;
+  left: 98%;
   cursor: pointer;
 }
 .topsep{
@@ -144,5 +144,8 @@ button[type="button"]:hover {
   button {
     font-size: 0.9em;
     width: 97%;
+  }
+  .close{
+    left: 92%;
   }
 }
