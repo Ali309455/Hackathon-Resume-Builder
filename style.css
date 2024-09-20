@@ -123,6 +123,9 @@ ul li {
   right: 25%;
   cursor: pointer;
 }
+.backtoform{
+  cursor: pointer;
+}
 
 
 /* Default style for contenteditable elements */
@@ -139,6 +142,65 @@ ul li {
   border-bottom-right-radius: 8px;
   outline: none;
   border-bottom-left-radius: 08px;
+}
+
+
+
+/* styles.css */
+
+body {
+  font-family: Arial, sans-serif;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-button {
+  background-color: #575757;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  font-size: 0.95em;
+  font-family: "Roboto",Arial, Helvetica, sans-serif;
+  border-radius: 6px;
+  cursor: pointer;
+  outline: none;
+}
+
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 120px;
+  border-radius: 8px;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-item {
+  color: black;
+  padding: 6px 12px;
+  text-decoration: none;
+  display: block;
+  border-radius: 8px;
+  font-size: 0.85em;
+  font-family: "Roboto",Arial, Helvetica, sans-serif;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+}
+
+.dropdown-item:hover {
+  background-color: #f1f1f1;
+}
+.nav_btns{
+  display: none;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding-bottom: 10px;
 }
 
 

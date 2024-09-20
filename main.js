@@ -8,6 +8,15 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+// interface Window {
+//   jspdf: any; // You can replace 'any' with the actual type if you want
+// }
+// import jsPDF from 'jspdf'; // Import the jsPDF library
+// window.jsPDF = window.jspdf.jsPDF;
+// Import the jsPDF library
+// import jsPDF from 'jspdf';
+// Assign the jsPDF object to the window object
+// (window as any).jsPDF = jsPDF;
 // get data from the forms
 function getformdata(selector) {
     return __awaiter(this, void 0, void 0, function* () {
@@ -122,6 +131,13 @@ function removeitem(selector) {
         });
     }
 }
+// Function to toggle the dropdown menu visibility
+function toggleDropdown() {
+    const menu = document.getElementById('dropdownMenu');
+    if (menu) {
+        menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+    }
+}
 // create resume from the form data
 function createresume(data) {
     const container = document.querySelector(".resume");
@@ -131,7 +147,9 @@ function createresume(data) {
     }
     setTimeout(() => {
         var _a;
-        container.innerHTML = `<div class="edit"><img src="assets/edit.svg" alt="">Edit</div><!-- Personal Information -->
+        container.innerHTML = `
+    
+    <div class="edit"><img src="assets/edit.svg" alt="">Edit</div><!-- Personal Information -->
     <header class="personal-info">
         <img src="assets/profile.png" alt="Profile Picture" class="profile-pic">
         <div class="personalinfo_desc">
@@ -141,7 +159,8 @@ function createresume(data) {
                 ${data.email}  &nbsp| <img src="assets/phone.svg" alt="phone-icon"> ${data.phone}
             </p>
         </div>
-    </header>`;
+    </header>
+    `;
         if (Array.isArray(data.degree) &&
             Array.isArray(data.university)) {
             container.innerHTML =
@@ -274,7 +293,8 @@ function createresume(data) {
                 </ul>
             </div>
         </div>
-    </section>`;
+    </section>
+    `;
         }
         if (document.querySelector(".resume")) {
             document.querySelector(".resume").style.display =
@@ -332,13 +352,30 @@ function main() {
             //   skills: "PROGMRAMMING:/b JavaScript, Python, HTML/CSS /new Tools:/b Git",
             // };
             createresume(res);
-            (_a = document.querySelector(".bar")) === null || _a === void 0 ? void 0 : _a.scrollTo({
+            (_a = document.querySelector(".resume")) === null || _a === void 0 ? void 0 : _a.scrollTo({
                 top: 0,
                 behavior: "smooth",
             });
+            document.querySelector(".nav_btns").style.display = "flex";
             setTimeout(() => {
                 removeitem("education-item");
                 removeitem("experience-item");
+                document.querySelector(".form-container").style.display = "none";
+                // Add event listener to edit in forms button
+                const editinformbtn = document.querySelector(".backtoform");
+                if (editinformbtn) {
+                    editinformbtn.addEventListener("click", () => {
+                        document.querySelector(".nav_btns").style.display = "none";
+                        document.querySelector(".form-container").style.transform = "translateX(1px)";
+                        document.querySelector(".resume").style.display = "none";
+                        document.querySelector(".form-container").style.display = "block";
+                    });
+                }
+                // Add event listener to the dropdown button
+                const dropdownButton = document.getElementById('dropdownButton');
+                if (dropdownButton) {
+                    dropdownButton.addEventListener("click", toggleDropdown);
+                }
                 // (document.querySelector(".edit") as HTMLElement).style.display = "flex";
             }, 2000);
         }));

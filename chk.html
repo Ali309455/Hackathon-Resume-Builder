@@ -2,78 +2,56 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Resume Builder</title>
-    <link rel="stylesheet" href="formsstyle.css">
+    <title>Creating PDF from HTML</title>
+    <link rel="stylesheet" href="style.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.4/jspdf.debug.js" ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.4/jspdf.min.js" ></script>
 </head>
 <body>
-    <div class="form-container">
-        <h1>Resume Builder</h1>
-        <form id="resumeForm">
+    <div id="whatToPrint" style="width: 500px;">
+        <p>Hi</p>
+        <p>Printing this :)</p>
+        <h1>This should show up in my pdf</h1>
 
-            <!-- Personal Information Section -->
-            <section class="form-section">
-                <h2>Personal Information</h2>
-                <label for="name">Name:</label>
-                <input type="text" id="name" name="name" placeholder="Enter your full name" required>
-                
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email" placeholder="Enter your email address" required>
-                
-                <label for="phone">Phone:</label>
-                <input type="tel" id="phone" name="phone" placeholder="Enter your phone number" required>
-                
-                <label for="profilePicture">Profile Picture:</label>
-                <input type="file" id="profilePicture" name="profilePicture">
-            </section>
+        <!--<img src="https://th.bing.com/th/id/OIP.wdkLi0wAUuLf5gdNFincPwHaEd?pid=ImgDet&rs=1"/>-->
 
-            <!-- Education Section -->
-            <section class="form-section" id="educationSection">
-                <h2>Education</h2>
-                <div class="education-item">
-                    <label for="degree">Degree:</label>
-                    <input type="text" name="degree" placeholder="e.g., Master of Science" required>
-                    
-                    <label for="university">University/College:</label>
-                    <input type="text" name="university" placeholder="e.g., XYZ University" required>
-                    
-                    <label for="year">Year:</label>
-                    <input type="text" name="year" placeholder="e.g., 2020 - 2022" required>
-                    
-                    <button type="button" onclick="addEducation()">Add More Education</button>
-                </div>
-            </section>
-
-            <!-- Skills Section -->
-            <section class="form-section">
-                <h2>Skills</h2>
-                <label for="skills">List your skills:</label>
-                <textarea id="skills" name="skills" rows="3" placeholder="e.g., JavaScript, Python, HTML/CSS, etc."></textarea>
-            </section>
-
-            <!-- Work Experience Section -->
-            <section class="form-section" id="experienceSection">
-                <h2>Work Experience</h2>
-                <div class="experience-item">
-                    <label for="jobTitle">Job Title:</label>
-                    <input type="text" name="jobTitle" placeholder="e.g., Software Developer" required>
-                    
-                    <label for="company">Company:</label>
-                    <input type="text" name="company" placeholder="e.g., Devsinc." required>
-                    
-                    <label for="jobYear">Year:</label>
-                    <input type="text" name="jobYear" placeholder="e.g., 2022 - Present" required>
-                    
-                    <textarea name="jobDescription" rows="3" placeholder="Describe your responsibilities"></textarea>
-                    
-                    <button type="button" onclick="addExperience()">Add More Experience</button>
-                </div>
-            </section>
-
-            <button type="submit">Generate Resume</button>
-        </form>
+        <a href="javascript:generatePDF()" id="downloadButton">Click to download</a>
     </div>
 
-    <script src="forms.js"></script>
+    <script>
+        async function generatePDF() {
+            document.getElementById("downloadButton").innerHTML = "Currently downloading, please wait";
+
+            //Downloading
+            var downloading = document.getElementById("whatToPrint");
+            var doc = new jsPDF('l', 'pt');
+
+            await html2canvas(downloading, {
+                //allowTaint: true,
+                //useCORS: true,
+                width: 530
+            }).then((canvas) => {
+                //Canvas (convert to PNG)
+                doc.addImage(canvas.toDataURL("image/png"), 'PNG', 5, 5, 500, 200);
+            })
+
+            doc.save("Document.pdf");
+
+            //End of downloading
+
+            document.getElementById("downloadButton").innerHTML = "Click to download";
+        }
+    </script>
 </body>
 </html>
+
+<!--
+
+HTML + CSS -> PNG (html2canvas)
+PNG -> Add to PDF (jsPDF)
+Download PDF (jsPDF)
+
+-->

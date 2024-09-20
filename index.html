@@ -7,10 +7,32 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="utility.css">
     <link rel="stylesheet" href="formsstyle.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.4/jspdf.debug.js" ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.4/jspdf.min.js" ></script>
 </head>
 <body>
     <div class="bar"></div>
+    <div class="nav_btns">
+        <div class="backtoform flex"><img src="assets/arrow.svg" alt="arrow-icon"> Edit in Form</div>
+        <div class="dropdown">
+            <button id="dropdownButton" class="dropdown-button flex"> Download As </button>
+            <div id="dropdownMenu" class="dropdown-menu">
+                <a  id="pdf" class="dropdown-item">PDF <img src="assets/pdf.svg" alt="pdf-icon"></a>
+                <a id="png" class="dropdown-item">IMAGE <img src="assets/image-icon.svg" alt="image-icon"></a>
+            </div>
+        </div>
+    </div>
     <div class="resume">
+        <!-- <div class="header">
+            <div class="backtoform flex"><img src="assets/arrow.svg" alt="arrow-icon"> Edit in Form</div>
+            <div class="dropdown">
+                <button id="dropdownButton" class="dropdown-button flex"> Download As </button>
+                <div id="dropdownMenu" class="dropdown-menu">
+                    <a href="file1.pdf" download="file1.pdf" class="dropdown-item">PDF <img src="assets/pdf.svg" alt="pdf-icon"></a>
+                    <a href="file2.pdf" download="file2.pdf" class="dropdown-item">IMAGE <img src="assets/image-icon.svg" alt="image-icon"></a>
+                </div>
+            </div>
+        </div> -->
         <!-- <div class="edit"><img src="assets/edit.svg" alt="">Edit</div> -->
         <!-- Personal Information -->
         <!-- <header class="personal-info">
@@ -87,8 +109,10 @@
                     </ul>
                 </div>
             </div>
-        </section> -->
+        </section>
+         -->
     </div>
+    
     <div class="form-container">
         <h1 class="main_heading" >Resume Builder</h1>
         <form id="resumeForm">
@@ -158,6 +182,6 @@
     </div>
 
     <script src="main.js"></script>
-    <!-- <script src="forms.js"></script> -->
+    <script src="pdf.js"></script>
 </body>
 </html>

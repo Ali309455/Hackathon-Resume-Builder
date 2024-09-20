@@ -1,8 +1,18 @@
+
 interface FormDataObject {
   [key: string]: string | string[];
 }
+// interface Window {
+//   jspdf: any; // You can replace 'any' with the actual type if you want
+// }
+// import jsPDF from 'jspdf'; // Import the jsPDF library
 
+  // window.jsPDF = window.jspdf.jsPDF;
+// Import the jsPDF library
+// import jsPDF from 'jspdf';
 
+// Assign the jsPDF object to the window object
+// (window as any).jsPDF = jsPDF;
 // get data from the forms
 async function getformdata(selector: string) {
   return new Promise((resolve, reject) => {
@@ -116,6 +126,13 @@ function removeitem(selector: string) {
     });
   }
 }
+// Function to toggle the dropdown menu visibility
+function toggleDropdown(): void {
+  const menu = document.getElementById('dropdownMenu');
+  if (menu) {
+      menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+  }
+}
 // create resume from the form data
 function createresume(data: object) {
   const container = document.querySelector(".resume");
@@ -125,7 +142,9 @@ function createresume(data: object) {
   }
 
   setTimeout(() => {
-    container.innerHTML = `<div class="edit"><img src="assets/edit.svg" alt="">Edit</div><!-- Personal Information -->
+    container.innerHTML = `
+    
+    <div class="edit"><img src="assets/edit.svg" alt="">Edit</div><!-- Personal Information -->
     <header class="personal-info">
         <img src="assets/profile.png" alt="Profile Picture" class="profile-pic">
         <div class="personalinfo_desc">
@@ -139,7 +158,8 @@ function createresume(data: object) {
     }
             </p>
         </div>
-    </header>`;
+    </header>
+    `;
 
     if (
       Array.isArray((data as FormDataObject).degree) &&
@@ -297,7 +317,8 @@ function createresume(data: object) {
                 </ul>
             </div>
         </div>
-    </section>`;
+    </section>
+    `;
     }
     if (document.querySelector(".resume")) {
       (document.querySelector(".resume") as HTMLElement).style.display =
@@ -356,17 +377,57 @@ async function main() {
     //   skills: "PROGMRAMMING:/b JavaScript, Python, HTML/CSS /new Tools:/b Git",
     // };
     createresume(res);
-    document.querySelector(".bar")?.scrollTo({
+    document.querySelector(".resume")?.scrollTo({
       top: 0,
       behavior: "smooth",
     });
+    (document.querySelector(".nav_btns") as HTMLElement).style.display = "flex"
+    
     setTimeout(() => {
       removeitem("education-item");
       removeitem("experience-item");
+      (document.querySelector(".form-container") as HTMLElement).style.display = "none"
+      // Add event listener to edit in forms button
+  const editinformbtn = document.querySelector(".backtoform")
+  
+  if(editinformbtn){
+    editinformbtn.addEventListener("click", () => {
+      (document.querySelector(".nav_btns") as HTMLElement).style.display = "none";
+
+      (document.querySelector(".form-container") as HTMLElement).style.transform = "translateX(1px)";
+      (document.querySelector(".resume") as HTMLElement).style.display = "none";
+      (document.querySelector(".form-container") as HTMLElement).style.display = "block";
+    });
+  }
+
+    // Add event listener to the dropdown button
+    const dropdownButton = document.getElementById('dropdownButton');
+    if (dropdownButton) {
+    dropdownButton.addEventListener("click" , toggleDropdown)
+      }
+    
+      
+
+
+
+
+  
       // (document.querySelector(".edit") as HTMLElement).style.display = "flex";
       
     }, 2000);
   });
+  
+
+
 }
+
+
+
+
+
+
+
+
+
 
 main();
