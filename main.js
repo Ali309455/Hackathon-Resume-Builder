@@ -153,7 +153,7 @@ function createresume(data) {
     <header class="personal-info">
         <img src="assets/profile.png" alt="Profile Picture" class="profile-pic">
         <div class="personalinfo_desc">
-        <h1>${data.name}</h1>
+        <h1 contenteditable = true >${data.name}</h1>
             <p contenteditable = true class="Email flex">
                 <img src="assets/email.svg" alt="email-icon">
                 ${data.email}  &nbsp| <img src="assets/phone.svg" alt="phone-icon"> ${data.phone}
@@ -304,7 +304,7 @@ function createresume(data) {
         else {
             console.error("No resume container found");
         }
-    }, 2000);
+    }, 1000);
     if (document.querySelector(".form-container")) {
         document.querySelector(".form-container").style.transform =
             "translateX(-1325px)";
@@ -377,7 +377,7 @@ function main() {
                     dropdownButton.addEventListener("click", toggleDropdown);
                 }
                 // (document.querySelector(".edit") as HTMLElement).style.display = "flex";
-            }, 2000);
+            }, 1500);
         }));
     });
 }
