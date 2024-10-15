@@ -93,7 +93,7 @@ function addadditionalform(selector) {
         }
     }
 }
-// add functionality to close it 
+// add functionality to close it
 function closeadditionalform(parent) {
     const items = document.querySelectorAll(`.${parent}`);
     console.log(items);
@@ -133,9 +133,9 @@ function removeitem(selector) {
 }
 // Function to toggle the dropdown menu visibility
 function toggleDropdown() {
-    const menu = document.getElementById('dropdownMenu');
+    const menu = document.getElementById("dropdownMenu");
     if (menu) {
-        menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+        menu.style.display = menu.style.display === "block" ? "none" : "block";
     }
 }
 // create resume from the form data
@@ -154,10 +154,10 @@ function createresume(data) {
         <img src="assets/profile.png" alt="Profile Picture" class="profile-pic">
         <div class="personalinfo_desc">
         <h1 contenteditable = true >${data.name}</h1>
-            <p contenteditable = true class="Email flex">
-                <img src="assets/email.svg" alt="email-icon">
-                ${data.email}  &nbsp| <img src="assets/phone.svg" alt="phone-icon"> ${data.phone}
-            </p>
+            <div contenteditable = true class="Email">
+                <p class = "flex"><img src="assets/email.svg" class="personalinfo_icons" alt="email-icon">
+                ${data.email} </p><p class = "flex">  <img src="assets/phone.svg" class="personalinfo_icons" alt="phone-icon"> ${data.phone}</p>
+            </div>
         </div>
     </header>
     `;
@@ -177,7 +177,7 @@ function createresume(data) {
                         `
         <div class="education-item resume-education">
             <div class="hidebtn">
-                <div class="hide"><img src="assets/delete.svg" alt="delete-icon"></div>
+                <div class="hide"><img src="assets/delete.svg" class="hide_icon" alt="delete-icon"></div>
             </div>
             <div class="desc">
                 <h3 contenteditable = true >${degree}</h3>
@@ -195,7 +195,7 @@ function createresume(data) {
         <h2 >Education</h2>
         <div class="education-item resume-education">
             <div class="hidebtn">
-                <div class="hide"><img src="assets/delete.svg" alt="delete-icon"></div>
+                <div class="hide"><img src="assets/delete.svg" class="hide_icon" alt="delete-icon"></div>
             </div>
             <div class="desc">
                 <h3 contenteditable = true >${data.degree}</h3>
@@ -216,11 +216,10 @@ function createresume(data) {
             skills = skills.split("/new");
             for (let item of skills) {
                 if (item.includes("/b")) {
-                    let e = (item.split('/b'));
+                    let e = item.split("/b");
                     console.log(e);
                     skillslist.innerHTML =
-                        skillslist.innerHTML +
-                            `<li><b>${e[0]}</b> ${e[1]}</li>`;
+                        skillslist.innerHTML + `<li><b>${e[0]}</b> ${e[1]}</li>`;
                 }
             }
             // container.innerHTML =
@@ -242,7 +241,7 @@ function createresume(data) {
                     `<li>${skills}</li>
             `;
         }
-        (_a = (document.querySelector(".skills"))) === null || _a === void 0 ? void 0 : _a.appendChild(skillslist);
+        (_a = document.querySelector(".skills")) === null || _a === void 0 ? void 0 : _a.appendChild(skillslist);
         if (Array.isArray(data.jobTitle) &&
             Array.isArray(data.jobYear)) {
             container.innerHTML =
@@ -260,7 +259,7 @@ function createresume(data) {
                         `
                 <div class="experience-item resume-experience">
                     <div class="hidebtn">
-                        <div class="hide"><img src="assets/delete.svg" alt="delete-icon"></div>
+                        <div class="hide"><img src="assets/delete.svg" class="hide_icon" alt="delete-icon"></div>
                     </div>
                     <div class="desc">
                         <h3 contenteditable = true >${jobTitle}</h3>
@@ -283,7 +282,7 @@ function createresume(data) {
 
         <div class="experience-item">
             <div class="hidebtn">
-                <div class="hide"><img src="assets/delete.svg" alt="delete-icon"></div>
+                <div class="hide"><img src="assets/delete.svg" class="hide_icon" alt="delete-icon"></div>
             </div>
             <div class="desc">
                 <h3 contenteditable = true >${data.jobTitle}</h3>
@@ -360,19 +359,22 @@ function main() {
             setTimeout(() => {
                 removeitem("education-item");
                 removeitem("experience-item");
-                document.querySelector(".form-container").style.display = "none";
+                document.querySelector(".form-container").style.display =
+                    "none";
                 // Add event listener to edit in forms button
                 const editinformbtn = document.querySelector(".backtoform");
                 if (editinformbtn) {
                     editinformbtn.addEventListener("click", () => {
-                        document.querySelector(".nav_btns").style.display = "none";
+                        document.querySelector(".nav_btns").style.display =
+                            "none";
                         document.querySelector(".form-container").style.transform = "translateX(1px)";
-                        document.querySelector(".resume").style.display = "none";
+                        document.querySelector(".resume").style.display =
+                            "none";
                         document.querySelector(".form-container").style.display = "block";
                     });
                 }
                 // Add event listener to the dropdown button
-                const dropdownButton = document.getElementById('dropdownButton');
+                const dropdownButton = document.getElementById("dropdownButton");
                 if (dropdownButton) {
                     dropdownButton.addEventListener("click", toggleDropdown);
                 }

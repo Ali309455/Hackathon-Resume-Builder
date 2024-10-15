@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Resume</title>
+    <!-- <link rel="stylesheet" href="chk.css"> -->
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="utility.css">
     <link rel="stylesheet" href="formsstyle.css">
@@ -15,7 +16,7 @@
     <div class="nav_btns">
         <div class="backtoform flex"><img src="assets/arrow.svg" alt="arrow-icon"> Edit in Form</div>
         <div class="dropdown">
-            <button id="dropdownButton" class="dropdown-button flex"> Download As </button>
+            <button id="dropdownButton" class="dropdown-btn"> Download As </button>
             <div id="dropdownMenu" class="dropdown-menu">
                 <a  id="pdf" class="dropdown-item">PDF <img src="assets/pdf.svg" alt="pdf-icon"></a>
                 <a id="png" class="dropdown-item">IMAGE <img src="assets/image-icon.svg" alt="image-icon"></a>
@@ -23,7 +24,7 @@
         </div>
     </div>
     <div class="resume">
-        <!-- <div class="header">
+        <div class="header">
             <div class="backtoform flex"><img src="assets/arrow.svg" alt="arrow-icon"> Edit in Form</div>
             <div class="dropdown">
                 <button id="dropdownButton" class="dropdown-button flex"> Download As </button>
@@ -32,7 +33,7 @@
                     <a href="file2.pdf" download="file2.pdf" class="dropdown-item">IMAGE <img src="assets/image-icon.svg" alt="image-icon"></a>
                 </div>
             </div>
-        </div> -->
+        </div>
         <!-- <div class="edit"><img src="assets/edit.svg" alt="">Edit</div> -->
         <!-- Personal Information -->
         <!-- <header class="personal-info">
@@ -109,8 +110,8 @@
                     </ul>
                 </div>
             </div>
-        </section>
-         -->
+        </section> -->
+        
     </div>
     
     <div class="form-container">
@@ -147,7 +148,7 @@
                     <input type="text" name="year" placeholder="e.g., 2020 - 2022" required>
                     
                 </div>
-                <button type="button" id="addeducation">Add More Education</button>
+                <button type="button" class="button" id="addeducation">Add More Education</button>
             </section>
 
             <!-- Skills Section -->
@@ -174,12 +175,12 @@
                     <textarea name="jobDescription" rows="3" placeholder="Describe your responsibilities"></textarea>
                     
                 </div>
-                <button type="button" id="addExperience" >Add More Experience</button>
+                <button type="button" class="button" id="addExperience" >Add More Experience</button>
             </section>
 
-            <button class = "submitbtn" type="submit">Generate Resume</button>
+            <button class = "submitbtn button" type="submit">Generate Resume</button>
         </form>
-    </div>
+    </div> 
 
     <script src="main.js"></script>
     <script src="image.js"></script>

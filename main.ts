@@ -1,4 +1,3 @@
-
 interface FormDataObject {
   [key: string]: string | string[];
 }
@@ -7,7 +6,7 @@ interface FormDataObject {
 // }
 // import jsPDF from 'jspdf'; // Import the jsPDF library
 
-  // window.jsPDF = window.jspdf.jsPDF;
+// window.jsPDF = window.jspdf.jsPDF;
 // Import the jsPDF library
 // import jsPDF from 'jspdf';
 
@@ -87,7 +86,7 @@ function addadditionalform(selector: string) {
     }
   }
 }
-// add functionality to close it 
+// add functionality to close it
 function closeadditionalform(parent: string) {
   const items = document.querySelectorAll(`.${parent}`);
   console.log(items);
@@ -128,9 +127,9 @@ function removeitem(selector: string) {
 }
 // Function to toggle the dropdown menu visibility
 function toggleDropdown(): void {
-  const menu = document.getElementById('dropdownMenu');
+  const menu = document.getElementById("dropdownMenu");
   if (menu) {
-      menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+    menu.style.display = menu.style.display === "block" ? "none" : "block";
   }
 }
 // create resume from the form data
@@ -149,14 +148,13 @@ function createresume(data: object) {
         <img src="assets/profile.png" alt="Profile Picture" class="profile-pic">
         <div class="personalinfo_desc">
         <h1 contenteditable = true >${(data as FormDataObject).name}</h1>
-            <p contenteditable = true class="Email flex">
-                <img src="assets/email.svg" alt="email-icon">
+            <div contenteditable = true class="Email">
+                <p class = "flex"><img src="assets/email.svg" class="personalinfo_icons" alt="email-icon">
                 ${
                   (data as FormDataObject).email
-                }  &nbsp| <img src="assets/phone.svg" alt="phone-icon"> ${
-      (data as FormDataObject).phone
-    }
-            </p>
+                } </p><p class = "flex">  <img src="assets/phone.svg" class="personalinfo_icons" alt="phone-icon"> ${
+      (data as FormDataObject).phone}</p>
+            </div>
         </div>
     </header>
     `;
@@ -184,7 +182,7 @@ function createresume(data: object) {
           `
         <div class="education-item resume-education">
             <div class="hidebtn">
-                <div class="hide"><img src="assets/delete.svg" alt="delete-icon"></div>
+                <div class="hide"><img src="assets/delete.svg" class="hide_icon" alt="delete-icon"></div>
             </div>
             <div class="desc">
                 <h3 contenteditable = true >${degree}</h3>
@@ -201,64 +199,59 @@ function createresume(data: object) {
         <h2 >Education</h2>
         <div class="education-item resume-education">
             <div class="hidebtn">
-                <div class="hide"><img src="assets/delete.svg" alt="delete-icon"></div>
+                <div class="hide"><img src="assets/delete.svg" class="hide_icon" alt="delete-icon"></div>
             </div>
             <div class="desc">
-                <h3 contenteditable = true >${(data as FormDataObject).degree}</h3>
-                <p contenteditable = true >${(data as FormDataObject).university}, ${
-          (data as FormDataObject).year
-        }</p>
+                <h3 contenteditable = true >${
+                  (data as FormDataObject).degree
+                }</h3>
+                <p contenteditable = true >${
+                  (data as FormDataObject).university
+                }, ${(data as FormDataObject).year}</p>
             </div>
         </div>
         </section>`;
     }
 
-    let skills = (data as FormDataObject).skills
-    let skillslist =  document.createElement("ul")
-    skillslist.classList.add("skills-list")
+    let skills = (data as FormDataObject).skills;
+    let skillslist = document.createElement("ul");
+    skillslist.classList.add("skills-list");
 
     container.innerHTML =
-          container.innerHTML +
-          `<!-- Skills -->
+      container.innerHTML +
+      `<!-- Skills -->
         <section class="section skills">
-            <h2>Skills</h2>`
-    if (skills.includes("/new")){
-
-        skills = (skills as string).split("/new")
-        for (let item of skills) {
-          
-          if (item.includes("/b")){
-            let e = (item.split('/b'));
-            console.log(e);
-            skillslist.innerHTML =
-            skillslist.innerHTML +
-            `<li><b>${e[0]}</b> ${e[1]}</li>`
-            
+            <h2>Skills</h2>`;
+    if (skills.includes("/new")) {
+      skills = (skills as string).split("/new");
+      for (let item of skills) {
+        if (item.includes("/b")) {
+          let e = item.split("/b");
+          console.log(e);
+          skillslist.innerHTML =
+            skillslist.innerHTML + `<li><b>${e[0]}</b> ${e[1]}</li>`;
         }
       }
       // container.innerHTML =
       //       container.innerHTML +`</ul>
       //   </section>`;
       console.log(skillslist.innerHTML);
-    }
-    else {
-      if(skills.includes("/b")){
-        
-        let item = (skills as string).split("/b")
+    } else {
+      if (skills.includes("/b")) {
+        let item = (skills as string).split("/b");
         skillslist.innerHTML =
-      skillslist.innerHTML +
-        `<li><b>${item[0]}</b> ${item[1]}</li>
+          skillslist.innerHTML +
+          `<li><b>${item[0]}</b> ${item[1]}</li>
         </ul>
-        </section>`;}
-        skillslist.innerHTML =
+        </section>`;
+      }
+      skillslist.innerHTML =
         skillslist.innerHTML +
         `<li>${skills}</li>
             `;
     }
-    (document.querySelector(".skills"))?.appendChild(skillslist)
-    
-    
-    
+    document.querySelector(".skills")?.appendChild(skillslist);
+
     if (
       Array.isArray((data as FormDataObject).jobTitle) &&
       Array.isArray((data as FormDataObject).jobYear)
@@ -283,7 +276,7 @@ function createresume(data: object) {
           `
                 <div class="experience-item resume-experience">
                     <div class="hidebtn">
-                        <div class="hide"><img src="assets/delete.svg" alt="delete-icon"></div>
+                        <div class="hide"><img src="assets/delete.svg" class="hide_icon" alt="delete-icon"></div>
                     </div>
                     <div class="desc">
                         <h3 contenteditable = true >${jobTitle}</h3>
@@ -305,13 +298,15 @@ function createresume(data: object) {
 
         <div class="experience-item">
             <div class="hidebtn">
-                <div class="hide"><img src="assets/delete.svg" alt="delete-icon"></div>
+                <div class="hide"><img src="assets/delete.svg" class="hide_icon" alt="delete-icon"></div>
             </div>
             <div class="desc">
-                <h3 contenteditable = true >${(data as FormDataObject).jobTitle}</h3>
-                <p contenteditable = true >${(data as FormDataObject).company}, ${
-          (data as FormDataObject).jobYear
-        }</p>
+                <h3 contenteditable = true >${
+                  (data as FormDataObject).jobTitle
+                }</h3>
+                <p contenteditable = true >${
+                  (data as FormDataObject).company
+                }, ${(data as FormDataObject).jobYear}</p>
                 <ul>
                     <li>${(data as FormDataObject).jobDescription}</li>
                 </ul>
@@ -327,11 +322,7 @@ function createresume(data: object) {
     } else {
       console.error("No resume container found");
     }
-  
-
-  
-  
-}, 1000);
+  }, 1000);
   if (document.querySelector(".form-container")) {
     (document.querySelector(".form-container") as HTMLElement).style.transform =
       "translateX(-1325px)";
@@ -356,7 +347,7 @@ async function main() {
     addadditionalform("form_experience_item");
     closeadditionalform("form_experience_item");
   });
-// trigger series of events when submit btn is clicked
+  // trigger series of events when submit btn is clicked
   document.querySelector(".submitbtn")?.addEventListener("click", async () => {
     // formdata object
     let res: any = await getformdata("resumeForm");
@@ -381,53 +372,41 @@ async function main() {
       top: 0,
       behavior: "smooth",
     });
-    (document.querySelector(".nav_btns") as HTMLElement).style.display = "flex"
-    
+    (document.querySelector(".nav_btns") as HTMLElement).style.display = "flex";
+
     setTimeout(() => {
       removeitem("education-item");
       removeitem("experience-item");
-      (document.querySelector(".form-container") as HTMLElement).style.display = "none"
+      (document.querySelector(".form-container") as HTMLElement).style.display =
+        "none";
       // Add event listener to edit in forms button
-  const editinformbtn = document.querySelector(".backtoform")
-  
-  if(editinformbtn){
-    editinformbtn.addEventListener("click", () => {
-      (document.querySelector(".nav_btns") as HTMLElement).style.display = "none";
+      const editinformbtn = document.querySelector(".backtoform");
 
-      (document.querySelector(".form-container") as HTMLElement).style.transform = "translateX(1px)";
-      (document.querySelector(".resume") as HTMLElement).style.display = "none";
-      (document.querySelector(".form-container") as HTMLElement).style.display = "block";
-    });
-  }
+      if (editinformbtn) {
+        editinformbtn.addEventListener("click", () => {
+          (document.querySelector(".nav_btns") as HTMLElement).style.display =
+            "none";
 
-    // Add event listener to the dropdown button
-    const dropdownButton = document.getElementById('dropdownButton');
-    if (dropdownButton) {
-    dropdownButton.addEventListener("click" , toggleDropdown)
+          (
+            document.querySelector(".form-container") as HTMLElement
+          ).style.transform = "translateX(1px)";
+          (document.querySelector(".resume") as HTMLElement).style.display =
+            "none";
+          (
+            document.querySelector(".form-container") as HTMLElement
+          ).style.display = "block";
+        });
       }
-    
-      
 
+      // Add event listener to the dropdown button
+      const dropdownButton = document.getElementById("dropdownButton");
+      if (dropdownButton) {
+        dropdownButton.addEventListener("click", toggleDropdown);
+      }
 
-
-
-  
       // (document.querySelector(".edit") as HTMLElement).style.display = "flex";
-      
     }, 1500);
   });
-  
-
-
 }
-
-
-
-
-
-
-
-
-
 
 main();
