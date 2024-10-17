@@ -8,23 +8,12 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-// interface Window {
-//   jspdf: any; // You can replace 'any' with the actual type if you want
-// }
-// import jsPDF from 'jspdf'; // Import the jsPDF library
-// window.jsPDF = window.jspdf.jsPDF;
-// Import the jsPDF library
-// import jsPDF from 'jspdf';
-// Assign the jsPDF object to the window object
-// (window as any).jsPDF = jsPDF;
-// get data from the forms
 function getformdata(selector) {
     return __awaiter(this, void 0, void 0, function* () {
         return new Promise((resolve, reject) => {
             var _a;
-            (_a = document
-                .getElementById(`${selector}`)) === null || _a === void 0 ? void 0 : _a.addEventListener("submit", function (event) {
-                event.preventDefault(); // Prevent the form from submitting normally
+            (_a = document.getElementById(`${selector}`)) === null || _a === void 0 ? void 0 : _a.addEventListener("submit", function (event) {
+                event.preventDefault();
                 // Create a new FormData object
                 const formData = new FormData(event.target);
                 // Convert FormData to a regular object
@@ -35,7 +24,7 @@ function getformdata(selector) {
                         if (!Array.isArray(formObj[key])) {
                             formObj[key] = [formObj[key]]; // Convert to an array if it's not already
                         }
-                        formObj[key].push(value); // Add new value to the existing array
+                        formObj[key].push(value);
                     }
                     else {
                         formObj[key] = value;
@@ -161,8 +150,7 @@ function createresume(data) {
         </div>
     </header>
     `;
-        if (Array.isArray(data.degree) &&
-            Array.isArray(data.university)) {
+        if (Array.isArray(data.degree) && Array.isArray(data.university)) {
             container.innerHTML =
                 container.innerHTML +
                     `<!-- Education -->
@@ -242,8 +230,7 @@ function createresume(data) {
             `;
         }
         (_a = document.querySelector(".skills")) === null || _a === void 0 ? void 0 : _a.appendChild(skillslist);
-        if (Array.isArray(data.jobTitle) &&
-            Array.isArray(data.jobYear)) {
+        if (Array.isArray(data.jobTitle) && Array.isArray(data.jobYear)) {
             container.innerHTML =
                 container.innerHTML +
                     `<!-- Experience -->

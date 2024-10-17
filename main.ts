@@ -1,24 +1,10 @@
 interface FormDataObject {
   [key: string]: string | string[];
 }
-// interface Window {
-//   jspdf: any; // You can replace 'any' with the actual type if you want
-// }
-// import jsPDF from 'jspdf'; // Import the jsPDF library
-
-// window.jsPDF = window.jspdf.jsPDF;
-// Import the jsPDF library
-// import jsPDF from 'jspdf';
-
-// Assign the jsPDF object to the window object
-// (window as any).jsPDF = jsPDF;
-// get data from the forms
 async function getformdata(selector: string) {
   return new Promise((resolve, reject) => {
-    document
-      .getElementById(`${selector}`)
-      ?.addEventListener("submit", function (event) {
-        event.preventDefault(); // Prevent the form from submitting normally
+    document.getElementById(`${selector}`)?.addEventListener("submit", function (event) {
+        event.preventDefault(); 
 
         // Create a new FormData object
         const formData = new FormData(event.target as HTMLFormElement);
@@ -32,7 +18,7 @@ async function getformdata(selector: string) {
             if (!Array.isArray(formObj[key])) {
               formObj[key] = [formObj[key] as string]; // Convert to an array if it's not already
             }
-            (formObj[key] as string[]).push(value as string); // Add new value to the existing array
+            (formObj[key] as string[]).push(value as string); 
           } else {
             formObj[key] = value as string;
           }
@@ -153,26 +139,20 @@ function createresume(data: object) {
                 ${
                   (data as FormDataObject).email
                 } </p><p class = "flex">  <img src="assets/phone.svg" class="personalinfo_icons" alt="phone-icon"> ${
-      (data as FormDataObject).phone}</p>
+      (data as FormDataObject).phone
+    }</p>
             </div>
         </div>
     </header>
     `;
 
-    if (
-      Array.isArray((data as FormDataObject).degree) &&
-      Array.isArray((data as FormDataObject).university)
-    ) {
+    if (Array.isArray((data as FormDataObject).degree) && Array.isArray((data as FormDataObject).university)) {
       container.innerHTML =
         container.innerHTML +
         `<!-- Education -->
     <section class="section">
         <h2>Education</h2>`;
-      for (
-        let index = 0;
-        index < (data as FormDataObject).degree.length;
-        index++
-      ) {
+      for (let index = 0; index < (data as FormDataObject).degree.length;index++) {
         const degree = (data as FormDataObject).degree[index];
         const university = (data as FormDataObject).university[index];
         const year = (data as FormDataObject).year[index];
@@ -252,10 +232,7 @@ function createresume(data: object) {
     }
     document.querySelector(".skills")?.appendChild(skillslist);
 
-    if (
-      Array.isArray((data as FormDataObject).jobTitle) &&
-      Array.isArray((data as FormDataObject).jobYear)
-    ) {
+    if (Array.isArray((data as FormDataObject).jobTitle) && Array.isArray((data as FormDataObject).jobYear)) {
       container.innerHTML =
         container.innerHTML +
         `<!-- Experience -->

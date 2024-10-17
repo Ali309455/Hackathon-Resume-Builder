@@ -62,7 +62,10 @@ h3 {
   align-items: flex-start;
   flex-direction: column;
   justify-content: center;
-  overflow: hidden;
+}
+.personalinfo_desc h1{
+  line-height: 1;
+  padding-bottom: 4px;
 }
 
 .resume h1 {
@@ -221,7 +224,7 @@ body {
   align-items: center;
   gap: 8px;
 }
-.flex{
+.flex {
   display: flex;
   align-items: center;
   gap: 8px;
@@ -247,13 +250,9 @@ body {
   .section h3 {
     margin: -2px;
   }
-  .hide_icon{
+  .hide_icon {
     width: 15px;
   }
-  [contenteditable] {
-    /* padding:  5px 10px; Add some padding for better appearance */
-  }
-
   /* Style when the contenteditable element is focused */
   [contenteditable]:focus {
     padding: 1px 2px;
@@ -264,9 +263,16 @@ body {
   } */
 }
 
-@media (max-width: 425px) {
-  .Email{
+@media (max-width: 400px) {
+  .Email {
+    width: 100%;
     gap: 2px;
     flex-direction: column;
+    justify-content: center;
   }
+  .Email p {
+    height: 2px;
+    font-size: 8px;
+  }
+  
 }

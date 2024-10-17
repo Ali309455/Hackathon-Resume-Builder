@@ -1,6 +1,4 @@
-/* Enhanced Styling for Resume Builder Form */
 
-/* Global Styles */
 body {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   background-color: #f0f4f8;
@@ -118,6 +116,9 @@ button[type="button"] {
 button[type="button"]:hover {
   background-color: #e6e8eb;
 }
+
+
+
 
 /* Responsive Styles */
 @media (max-width: 600px) {
