@@ -19,6 +19,7 @@ function getformdata(selector) {
                 // Convert FormData to a regular object
                 const formObj = {};
                 formData.forEach((value, key) => {
+                    console.log('Key:', key, 'Value:', value);
                     // Handle multiple input names (like education, experience)
                     if (formObj[key]) {
                         if (!Array.isArray(formObj[key])) {
@@ -85,7 +86,6 @@ function addadditionalform(selector) {
 // add functionality to close it
 function closeadditionalform(parent) {
     const items = document.querySelectorAll(`.${parent}`);
-    console.log(items);
     items.forEach((item) => {
         // Check if the item contains a child element with the class "close"
         const closeButton = item.querySelector(".close");
@@ -118,6 +118,22 @@ function removeitem(selector) {
                 item.querySelector(".hidebtn").style.display = "none";
             });
         });
+    }
+}
+// Function to handle welcome page
+function welcome(classname) {
+    let welcomecontainer = document.querySelector(`.${classname}`);
+    let formcontainer = document.querySelector(".form-container");
+    if (!welcomecontainer) {
+        console.error("No welcome container found");
+        return;
+    }
+    else {
+        let startbtn = document.querySelector(".startbtn");
+        startbtn === null || startbtn === void 0 ? void 0 : startbtn.addEventListener("click", (() => {
+            welcomecontainer.style.display = "none";
+            formcontainer.style.display = "block";
+        }));
     }
 }
 // Function to toggle the dropdown menu visibility
@@ -205,7 +221,6 @@ function createresume(data) {
             for (let item of skills) {
                 if (item.includes("/b")) {
                     let e = item.split("/b");
-                    console.log(e);
                     skillslist.innerHTML =
                         skillslist.innerHTML + `<li><b>${e[0]}</b> ${e[1]}</li>`;
                 }
@@ -316,6 +331,8 @@ function main() {
             addadditionalform("form_experience_item");
             closeadditionalform("form_experience_item");
         });
+        // show form container on button click
+        welcome("welcome");
         // trigger series of events when submit btn is clicked
         (_c = document.querySelector(".submitbtn")) === null || _c === void 0 ? void 0 : _c.addEventListener("click", () => __awaiter(this, void 0, void 0, function* () {
             var _a;

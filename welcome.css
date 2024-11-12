@@ -1,0 +1,107 @@
+/* General Styles */
+body {
+    font-family: 'Inter', sans-serif;
+    color: #4b5563; /* gray-600 */
+  }
+  
+  .section-container {
+    padding: 6rem 0;
+    background-color: white;
+  }
+  
+  .container {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 0 1.25rem;
+  }
+  
+  /* Header Styles */
+  .section-header {
+    text-align: center;
+    width: 100%;
+    margin-bottom: 5rem;
+  }
+  
+  .section-subtitle {
+    color: gray; /* indigo-500 */
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+    font-weight: 500;
+    margin-bottom: 0.25rem;
+  }
+  
+  .section-title {
+    font-size: 1.875rem;
+    font-weight: 500;
+    color: #1f2937; /* gray-900 */
+    margin-bottom: 1rem;
+  }
+  
+  .section-description {
+    max-width: 66.666667%;
+    margin: 0 auto;
+    line-height: 1.75;
+    font-size: 1rem;
+  }
+  
+  /* Card Styles */
+  .card-container {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .card {
+    width: 100%;
+    max-width: 25%;
+    padding: 1.5rem 2rem;
+    border-left: 2px solid rgba(107, 114, 128, 0.6); /* gray-200 */
+  }
+  
+  .card-title {
+    color: #1f2937; /* gray-900 */
+    font-size: 1.125rem;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+  }
+  
+  .card-description {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+  }
+  
+  .learn-more {
+    color: slategray; /* indigo-500 */
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
+  }
+  
+  .icon-arrow {
+    width: 1rem;
+    height: 1rem;
+    margin-left: 0.5rem;
+    stroke: currentColor;
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 2;
+  }
+  
+  /* Button Styles */
+  .cta-button {
+    display: flex;
+    margin: 4rem auto 0;
+    padding: 0.5rem 2rem;
+    font-size: 1.125rem;
+    color: white;
+    background-color: slategray; /* indigo-500 */
+    border: none;
+    border-radius: 0.375rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .cta-button:hover {
+    background-color: rgb(95, 94, 94); /* indigo-600 */
+  }
+  

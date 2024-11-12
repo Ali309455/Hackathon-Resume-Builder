@@ -3,6 +3,8 @@ function getImage() {
         setTimeout(() => {
             
             const input = document.getElementById('profilePicture');
+            console.log(input);
+            
             const file = input.files[0];
             
             if (file) {

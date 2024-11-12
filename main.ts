@@ -13,6 +13,8 @@ async function getformdata(selector: string) {
         const formObj: FormDataObject = {};
 
         formData.forEach((value, key) => {
+          console.log('Key:', key, 'Value:', value);
+          
           // Handle multiple input names (like education, experience)
           if (formObj[key]) {
             if (!Array.isArray(formObj[key])) {
@@ -75,7 +77,6 @@ function addadditionalform(selector: string) {
 // add functionality to close it
 function closeadditionalform(parent: string) {
   const items = document.querySelectorAll(`.${parent}`);
-  console.log(items);
 
   items.forEach((item) => {
     // Check if the item contains a child element with the class "close"
@@ -111,6 +112,24 @@ function removeitem(selector: string) {
     });
   }
 }
+// Function to handle welcome page
+function welcome(classname:string){
+  let welcomecontainer = document.querySelector(`.${classname}`);
+  let formcontainer = document.querySelector(".form-container");
+  if (!welcomecontainer) {
+    console.error("No welcome container found");
+    return;
+  }
+  else{
+    let startbtn = document.querySelector(".startbtn");
+    startbtn?.addEventListener("click", (()=>{
+      (welcomecontainer as HTMLElement).style.display = "none";
+      (formcontainer as HTMLElement).style.display = "block";
+    }))
+  }
+
+}
+
 // Function to toggle the dropdown menu visibility
 function toggleDropdown(): void {
   const menu = document.getElementById("dropdownMenu");
@@ -207,7 +226,6 @@ function createresume(data: object) {
       for (let item of skills) {
         if (item.includes("/b")) {
           let e = item.split("/b");
-          console.log(e);
           skillslist.innerHTML =
             skillslist.innerHTML + `<li><b>${e[0]}</b> ${e[1]}</li>`;
         }
@@ -324,6 +342,8 @@ async function main() {
     addadditionalform("form_experience_item");
     closeadditionalform("form_experience_item");
   });
+  // show form container on button click
+    welcome("welcome")
   // trigger series of events when submit btn is clicked
   document.querySelector(".submitbtn")?.addEventListener("click", async () => {
     // formdata object
