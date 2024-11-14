@@ -123,8 +123,11 @@ function welcome(classname:string){
   else{
     let startbtn = document.querySelector(".startbtn");
     startbtn?.addEventListener("click", (()=>{
-      (welcomecontainer as HTMLElement).style.display = "none";
-      (formcontainer as HTMLElement).style.display = "block";
+      setTimeout(() => {
+        (welcomecontainer as HTMLElement).style.display = "none";
+        (formcontainer as HTMLElement).style.display = "block";
+      }, 1200);
+      (welcomecontainer as HTMLElement).style.transform = "translateY(-13200px)"
     }))
   }
 

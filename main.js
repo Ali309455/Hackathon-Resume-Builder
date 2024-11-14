@@ -131,8 +131,11 @@ function welcome(classname) {
     else {
         let startbtn = document.querySelector(".startbtn");
         startbtn === null || startbtn === void 0 ? void 0 : startbtn.addEventListener("click", (() => {
-            welcomecontainer.style.display = "none";
-            formcontainer.style.display = "block";
+            setTimeout(() => {
+                welcomecontainer.style.display = "none";
+                formcontainer.style.display = "block";
+            }, 1200);
+            welcomecontainer.style.transform = "translateY(-13200px)";
         }));
     }
 }
